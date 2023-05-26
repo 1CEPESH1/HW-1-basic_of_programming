@@ -102,19 +102,20 @@ void merge(int* array, int const left, int const mid,
     delete[] rightArray;
 }
 
-void mergeSort(int* array, int const begin, int const end)
-{
-    if (begin >= end)
-        return; // Returns recursively
 
-    int mid = begin + (end - begin) / 2;
-    mergeSort(array, begin, mid);
-    mergeSort(array, mid + 1, end);
-    merge(array, begin, mid, end);
-}
 
 void mergeSort_1(int* ar, int size){
-    mergeSort(ar, 0, size - 1);
+   if(size < 2){
+       return;
+   }
+   if(size <= 10){
+       insertion(ar, size);
+       return;
+   }
+   int const mid = size/2;
+    mergeSort_1(ar, mid);
+    mergeSort_1(ar + mid, size - mid);
+    merge(ar, 0, mid - 1, size - 1);
 }
 
 /*Selection Sort*/
